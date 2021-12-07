@@ -18,5 +18,5 @@ Criando setup Ininical - Referencias.
 
 [version-image]: https://img.shields.io/badge/Version-1.0.0-brightgreen?style=for-the-badge&logo=appveyor
 [version-url]: https://img.shields.io/badge/version-1.0.0-green
-[backend-image]: https://img.shields.io/badge/Backend-Java%208-important?style=for-the-badge
+[backend-image]: https://img.shields.io/npm/types/typescript?style=for-the-badge
 [backend-url]: https://img.shields.io/npm/types/typescript?style=for-the-badge
