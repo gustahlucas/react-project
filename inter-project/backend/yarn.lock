@@ -2002,9 +2002,9 @@ pg-types@^2.1.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-pg@^8.7.1:
+pg@^8.6.0, pg@^8.7.1:
   version "8.7.1"
-  resolved "https://registry.npmjs.org/pg/-/pg-8.7.1.tgz"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-8.7.1.tgz#9ea9d1ec225980c36f94e181d009ab9f4ce4c471"
   integrity sha512-7bdYcv7V6U3KAtWjpQJJBww0UEsWuh4yQ/EjNf2HeO/NnvKjpvhEIe/A/TleP6wtmSKnUnghs5A9jUoK6iDdkA==
   dependencies:
     buffer-writer "2.0.0"
@@ -2034,6 +2034,13 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+postgre@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/postgre/-/postgre-0.1.8.tgz#9b6f8aa21d672691dbe839026c8faaa6ec642b5e"
+  integrity sha512-nP65V7ZxDzrvo1XD1Ks1rATx/QzySF6s1tNiRlv5PDghjA+YPzxvvncM/sN0hqZWjz78Txct6gArbxmxNBonXQ==
+  dependencies:
+    pg "^8.6.0"
+
 postgres-array@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz"
@@ -2055,6 +2062,11 @@ postgres-interval@^1.1.0:
   integrity sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==
   dependencies:
     xtend "^4.0.0"
+
+postgres@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/postgres/-/postgres-1.0.2.tgz#7b9f6769934f727cec0f1d7ef58d4915a327f5dd"
+  integrity sha512-zeLgt42KSUNgX/uvo+gbVxTAYwgSY6MIKuU/a8YWuObX4rtGuKrVWopvEAqIAPSO0FeHS1TsSKnqPjoufPy8NA==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
