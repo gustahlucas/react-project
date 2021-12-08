@@ -17,17 +17,20 @@ export default function userAuthenticated(
   res: Response,
   next: NextFunction,
 ): void {
+  // Validação do token JWT
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
     throw new AppError('Não foi enviado ao JWT', 401);
   }
+
   const [, token] = authHeader.split(' ');
 
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub, firstName, lastName } = decoded as unknown as ITokenPlayload;
+    const { sub, firstName, lastName } = decoded as ITokenPlayload;
 
     req.user = {
       id: sub,

@@ -20,15 +20,17 @@ export default class PixService {
       status: 'open',
     };
     const register = await pixRepository.save(requestData);
+
     const key = encodeKey(user.id || '', value, register.id);
 
     return key;
   }
+
   async pay(key: string, user: Partial<User>) {
     const keyDecoded = decodeKey(key);
 
     if (keyDecoded.userId === user.id) {
-      throw new AppError('Não é possível receber o PIX do mesmo usuário', 401);
+      throw new AppError('Não é possivel receber o PIX do mesmo usuário', 401);
     }
 
     const pixRepository = getRepository(Pix);
@@ -37,9 +39,7 @@ export default class PixService {
     const requestingUser = await userRepository.findOne({
       where: { id: keyDecoded.userId },
     });
-    const payingUser = await userRepository.findOne({
-      where: { id: user.id },
-    });
+    const payingUser = await userRepository.findOne({ where: { id: user.id } });
 
     if (payingUser?.wallet && payingUser.wallet < Number(keyDecoded.value)) {
       throw new AppError('Não há saldo suficiente para fazer o pagamento', 401);
@@ -64,7 +64,7 @@ export default class PixService {
     });
 
     if (!pixTransaction) {
-      throw new AppError('Chave inválida para pagamento', 401);
+      throw new AppError('Chave inválida par pagamento', 401);
     }
 
     pixTransaction.status = 'close';
@@ -72,54 +72,48 @@ export default class PixService {
 
     await pixRepository.save(pixTransaction);
 
-    return { msg: 'Pagamento efetuado com sucesso' };
+    return { mag: 'Pagamento efetudo com sucesso' };
   }
 
   async transactions(user: Partial<User>) {
     const pixRepository = getRepository(Pix);
 
     const pixReceived = await await pixRepository.find({
-      where: {
-        requestingUser: user.id,
-        status: 'close',
-        relations: ['payingUser'],
-      },
+      where: { requestingUser: user.id, status: 'close' },
+      relations: ['payingUser'],
     });
 
     const pixPaying = await pixRepository.find({
-      where: {
-        payingUser: user.id,
-        status: 'close',
-        relations: ['requestingUser'],
-      },
+      where: { payingUser: user.id, status: 'close' },
+      relations: ['requestingUser'],
     });
 
     const received = pixReceived.map(transaction => ({
       value: transaction.value,
       user: {
-        firstName: transaction.payingUser.firstName,
+        firstname: transaction.payingUser.firstName,
         lastName: transaction.payingUser.lastName,
       },
-      updateAt: transaction.updateAt,
+      updatedAt: transaction.updatedAt,
       type: 'received',
     }));
 
     const paying = pixPaying.map(transaction => ({
       value: transaction.value,
       user: {
-        firstName: transaction.requestinqUser.firstName,
-        lastName: transaction.requestinqUser.lastName,
+        firstname: transaction.requestingUser.firstName,
+        lastName: transaction.requestingUser.lastName,
       },
-      updateAt: transaction.updateAt,
+      updatedAt: transaction.updatedAt,
       type: 'paid',
     }));
 
     const allTransactions = received.concat(paying);
 
     allTransactions.sort(function (a, b) {
-      const dateA = new Date(a.updateAt).getTime();
-      const dateB = new Date(b.updateAt).getTime();
-      return dateA > dateB ? 1 : -1;
+      const dateA = new Date(a.updatedAt).getTime();
+      const dateB = new Date(b.updatedAt).getTime();
+      return dateA < dateB ? 1 : -1;
     });
 
     return allTransactions;

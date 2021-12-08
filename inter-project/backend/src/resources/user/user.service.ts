@@ -1,12 +1,13 @@
 import { getRepository } from 'typeorm';
-import md5 from 'crypto-js/md5';
 import { sign } from 'jsonwebtoken';
+import md5 from 'crypto-js/md5';
 
-import authConfig from '../../config/auth';
 import { User } from '../../entity/User';
-import { UserSignUp } from './dtos/user.signup.dtos';
-import { UserSignIn } from './dtos/user.signin.dtos';
 import AppError from '../../shared/error/AppError';
+import authConfig from '../../config/auth';
+
+import { UserSignIn } from './dtos/user.signin.dtos';
+import { UserSignUp } from './dtos/user.signup.dtos';
 
 export default class UserService {
   async signin(user: UserSignIn) {
@@ -18,9 +19,9 @@ export default class UserService {
     const existUser = await userRepository.findOne({
       where: { email, password: passwordHash },
     });
-    // Verificação de existencia de usuario
+
     if (!existUser) {
-      throw new AppError('Usuário não encontrado', 401);
+      throw new AppError('Usuário não encontrato', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
@@ -28,7 +29,7 @@ export default class UserService {
     const token = sign(
       {
         firstName: existUser.firstName,
-        lastname: existUser.lastName,
+        lastName: existUser.lastName,
         accountNumber: existUser.accountNumber,
         accountDigit: existUser.accountDigit,
         wallet: existUser.wallet,
@@ -42,6 +43,7 @@ export default class UserService {
 
     // @ts-expect-error ignora
     delete existUser.password;
+
     return { accessToken: token };
   }
 
@@ -71,7 +73,7 @@ export default class UserService {
     const token = sign(
       {
         firstName: user.firstName,
-        lastname: user.lastName,
+        lastName: user.lastName,
         accountNumber: userData.accountNumber,
         accountDigit: userData.accountDigit,
         wallet: userData.wallet,
@@ -82,7 +84,10 @@ export default class UserService {
         expiresIn,
       },
     );
+
+    return { accessToken: token };
   }
+
   async me(user: Partial<User>) {
     const userRepository = getRepository(User);
     const currentUser = await userRepository.findOne({
@@ -90,10 +95,10 @@ export default class UserService {
     });
 
     if (!currentUser) {
-      throw new AppError('Usuário não encontrado', 401);
+      throw new AppError('Usuário não econtrado', 401);
     }
 
-    //@ts-expect-error ignora
+    // @ts-expect-error ignora
     delete currentUser.password;
 
     return currentUser;
