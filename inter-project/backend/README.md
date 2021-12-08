@@ -1,6 +1,6 @@
 # Inter Project - BackEnd
 
-Projeto realizado na imersão Inter
+Esta api se trata de um projeto bootcamp ofertado pelo banco Inter junto com a plataforma Digital Inovation, com ela é possível cadastrar usuários, realizar o login, assim como também fazer transações de valores, transferências via chave pix gerada pela API. Postgres é o banco de dados utilizado para esse projeto
 
 # Inter
 
