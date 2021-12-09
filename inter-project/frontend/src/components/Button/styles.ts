@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
+    font-family: Roboto, sans-serif;
+
     width: 100%;
     height: 46px;
     color: ${({ theme }) => theme.colors.background};
@@ -12,6 +14,7 @@ export const ButtonContainer = styled.button`
     justify-content: center;
     align-items: center;
     z-index: 5000;
+
     &:hover {
         filter: opacity(0.8);
     }

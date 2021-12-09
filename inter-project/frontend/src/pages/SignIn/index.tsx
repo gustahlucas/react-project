@@ -29,9 +29,12 @@ const SignIn = () => {
                     <Button type="button" onClick={handleToSingIn}>
                         ENTRAR
                     </Button>
-                    <p>
-                        Ainda não tem cadastro?{" "}
-                        <Link to="/signup">Cadastre-se Já</Link>
+                    <p className="p">
+                        Ainda não tem cadastro?
+                        <Link to="/signup" className="a">
+                            {" "}
+                            Cadastre-se Já
+                        </Link>
                     </p>
                 </ButtonContainer>
             </Card>

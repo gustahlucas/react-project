@@ -34,13 +34,16 @@ export const ButtonContainer = styled.div`
     flex-direction: column;
 
     p {
-        font-size: 1rem;
+        font-size: 0.75rem;
         font-weight: 400;
         color: ${({ theme }) => theme.colors.secondary};
+        font-family: Roboto, sans-serif;
 
         a {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
+            text-decoration: none;
+            color: ${({ theme }) => theme.colors.primary};
         }
     }
 `;
